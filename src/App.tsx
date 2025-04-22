@@ -5,16 +5,16 @@ import Carousel from './components/Carousel';
 import SettingInput from './components/SettingInput';
 
 const images = [
-  './img/1.png',
-  './img/2.png',
-  './img/3.png',
-  './img/4.png',
-  './img/5.png',
-  './img/6.png',
-  './img/7.png',
-  './img/8.png',
-  './img/9.png',
-  './img/10.png',
+  '/img/1.png',
+  '/img/2.png',
+  '/img/3.png',
+  '/img/4.png',
+  '/img/5.png',
+  '/img/6.png',
+  '/img/7.png',
+  '/img/8.png',
+  '/img/9.png',
+  '/img/10.png',
 ];
 
 interface CarouselSettings {
@@ -38,7 +38,6 @@ const App: React.FC = () => {
 
   const handleSettingsChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, type, value, checked } = event.target;
-
     const newValue = type === 'checkbox' ? checked : Number(value);
 
     setSettings(prevSettings => ({
@@ -99,7 +98,6 @@ const App: React.FC = () => {
 
         <div className="settings__wrapper">
           <label htmlFor="infiniteId">Infinite:</label>
-
           <input
             id="infiniteId"
             className="App__form--input"
@@ -110,6 +108,7 @@ const App: React.FC = () => {
           />
         </div>
       </div>
+
       <Carousel
         images={images}
         step={step}

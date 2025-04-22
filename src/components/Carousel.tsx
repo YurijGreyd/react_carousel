@@ -21,15 +21,18 @@ const Carousel: React.FC<CarouselProps> = ({
   const [position, setPosition] = useState(0);
 
   const maxBack = 0;
-  const maxForward = -Math.max(0, images.length - frameSize);
+  const maxOffset = Math.max(0, images.length - frameSize);
+  const lastValidStep = Math.ceil(maxOffset / step) * step;
+  const maxForward = -Math.min(lastValidStep, maxOffset);
+
   const isAtStart = position === maxBack;
-  const isAtEnd = position === maxForward;
+  const isAtEnd = position <= maxForward;
 
   const handlePrevClick = () => {
     if (infinite && isAtStart) {
       setPosition(maxForward);
     } else if (!isAtStart) {
-      setPosition(Math.min(position + step, maxBack));
+      setPosition(prev => Math.min(prev + step, maxBack));
     }
   };
 
@@ -37,7 +40,7 @@ const Carousel: React.FC<CarouselProps> = ({
     if (infinite && isAtEnd) {
       setPosition(maxBack);
     } else if (!isAtEnd) {
-      setPosition(Math.max(position - step, maxForward));
+      setPosition(prev => Math.max(prev - step, maxForward));
     }
   };
 
